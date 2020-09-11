@@ -10,7 +10,7 @@ if GetDepend('PKG_USING_MS5805'):
     src += Glob('src/sensor_meas_ms5805.c')
 
 if GetDepend('PKG_USING_MS5805_SAMPLE'):
-    src += Glob('examples/ms5805_sample.c')
+    src += Glob('examples/examples_ms5805.c')
 
 # add dhtxx include path.
 path  = [cwd + '/inc']

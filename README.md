@@ -59,6 +59,7 @@ MS5805 是 MEAS（瑞士）推出的一款  IIC 总线接口的新一代高分�
 MS5805: MS5805 Digital pressure sensor
     [*]   Enable MS5805 pressure
     [*]   Enable MS5805 temperature
+    [*]   Enable MS5805 example
         Version (latest)  --->
 ```
 
