@@ -39,7 +39,7 @@ static void read_ms5805_entry(void *args)
         rt_kprintf("Open baro device failed.\n");
         return;
     }
-    sensor_temp = rt_device_find("baro_ms5805");
+    sensor_temp = rt_device_find("temp_ms5805");
     if (!sensor_temp)
     {
         rt_kprintf("Can't find temp device.\n");
@@ -59,7 +59,7 @@ static void read_ms5805_entry(void *args)
         }
         if(rt_device_read(sensor_temp, 0, &data, 1)==1)
         {
-              rt_kprintf("temp: %5d.%d, timestamp:%5d\n", data.data.temp,data.data.temp/10, data.timestamp);
+              rt_kprintf("temp: %5d.%d, timestamp:%5d\n", data.data.temp/10,data.data.temp%10, data.timestamp);
         }
         rt_thread_mdelay(3000);
     }
