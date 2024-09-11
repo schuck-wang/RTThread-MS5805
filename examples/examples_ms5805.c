@@ -11,6 +11,8 @@
 #include <rtdevice.h>
 #include <board.h>
 
+
+#if defined(RT_USING_SENSOR)
 #include "sensor_meas_ms5805.h"
 
 int ms5805_port(void)
@@ -21,12 +23,14 @@ int ms5805_port(void)
     return RT_EOK;
 }
 INIT_COMPONENT_EXPORT(ms5805_port);
-
+#endif
 static void read_ms5805_entry(void *args)
 {
+    #if defined(RT_USING_SENSOR)
     rt_device_t sensor_baro = RT_NULL;
     rt_device_t sensor_temp = RT_NULL;
     static struct rt_sensor_data data;
+    #if defined(PKG_MS5805_USING_BARO)
     sensor_baro = rt_device_find("baro_ms5805");
     if (!sensor_baro)
     {
@@ -39,6 +43,8 @@ static void read_ms5805_entry(void *args)
         rt_kprintf("Open baro device failed.\n");
         return;
     }
+    #endif
+    #if defined(PKG_MS5805_USING_TEMP)
     sensor_temp = rt_device_find("temp_ms5805");
     if (!sensor_temp)
     {
@@ -51,20 +57,30 @@ static void read_ms5805_entry(void *args)
         rt_kprintf("Open temp device failed.\n");
         return;
     }
+    #endif
     while (1)
     {
+        #if defined(PKG_MS5805_USING_BARO)
         if(rt_device_read(sensor_baro, 0, &data, 1)==1)
         {
              rt_kprintf("baro: %5d.%d, timestamp:%5d\n", data.data.baro/1000,data.data.baro%1000, data.timestamp);
         }
+        #endif
+        #if defined(PKG_MS5805_USING_TEMP)
         if(rt_device_read(sensor_temp, 0, &data, 1)==1)
         {
               rt_kprintf("temp: %5d.%d, timestamp:%5d\n", data.data.temp/10,data.data.temp%10, data.timestamp);
         }
+        #endif
         rt_thread_mdelay(3000);
     }
+    #if defined(PKG_MS5805_USING_BARO)
     rt_device_close(sensor_baro);
+    #endif
+    #if defined(PKG_MS5805_USING_TEMP)
     rt_device_close(sensor_temp);
+    #endif
+    #endif
 }
 static int ms5805_read_sample(void)
 {

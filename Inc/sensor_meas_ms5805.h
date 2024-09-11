@@ -9,12 +9,17 @@
  */
 #ifndef __SENSOR_MEAS_MS5805_H__
 #define __SENSOR_MEAS_MS5805_H__
+#include <rtdevice.h>
 
-#include "sensor.h"
+#if defined(RT_VERSION_CHECK)
+    #if (RTTHREAD_VERSION >= RT_VERSION_CHECK(5, 0, 2))
+        #define RT_SIZE_TYPE   rt_ssize_t
+    #else
+        #define RT_SIZE_TYPE   rt_size_t
+    #endif
+#endif
 #include "ms5805.h"
 
-#define MS5805_USING_BARO
-#define MS5805_USING_TEMP
 int rt_hw_ms5805_init(const char *name, struct rt_sensor_config *cfg);
 
 #endif /*__SENSOR_MEAS_MS5805_H__*/

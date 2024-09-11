@@ -22,7 +22,7 @@ static ms5805_device_t _ms5805_create(struct rt_sensor_intf *intf)
     return dev;
 }
 
-static rt_size_t ms5805_fetch_data(struct rt_sensor_device *sensor, void *buf, rt_size_t len)
+static RT_SIZE_TYPE ms5805_fetch_data(struct rt_sensor_device *sensor, void *buf, rt_size_t len)
 {
     ms5805_device_t ms5805 = (ms5805_device_t)sensor->parent.user_data;
     struct rt_sensor_data *data = (struct rt_sensor_data *)buf;
@@ -130,16 +130,16 @@ static int rt_hw_ms5805_temp_init(const char *name, struct rt_sensor_config *cfg
 
 int rt_hw_ms5805_init(const char *name, struct rt_sensor_config *cfg)
 {
-#if defined(MS5805_USING_TEMP) || defined(MS5805_USING_BARO)
+#if defined(PKG_MS5805_USING_TEMP) || defined(PKG_MS5805_USING_BARO)
     ms5805_device_t ms5805 = _ms5805_create(&cfg->intf);
     int tmp = 0;
 
     if (ms5805)
     {
-#ifdef MS5805_USING_BARO
+#ifdef PKG_MS5805_USING_BARO
         tmp += rt_hw_ms5805_baro_init(name, cfg, ms5805);
 #endif
-#ifdef MS5805_USING_TEMP
+#ifdef PKG_MS5805_USING_TEMP
         tmp += rt_hw_ms5805_temp_init(name, cfg, ms5805);
 #endif
         if (tmp != 0)
