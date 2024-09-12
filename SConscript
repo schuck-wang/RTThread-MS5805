@@ -5,9 +5,10 @@ src   = []
 cwd   = GetCurrentDir()
 
 # add ms5805 src files.
-if GetDepend('PKG_USING_MS5805'):
-    src += Glob('Src/ms5805.c')
-    src += Glob('Src/sensor_meas_ms5805.c')
+src += ['Src/ms5805.c']
+
+if GetDepend('PKG_MS5805_USING_SENSOR_V1'):
+    src += ['Src/sensor_meas_ms5805.c']
 
 if GetDepend('PKG_USING_MS5805_SAMPLE'):
     src += Glob('examples/examples_ms5805.c')
