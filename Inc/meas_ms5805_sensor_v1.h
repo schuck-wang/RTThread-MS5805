@@ -7,8 +7,8 @@
  * Date           Author       Notes
  * 2020-08-19     Administrator       the first version
  */
-#ifndef __SENSOR_MEAS_MS5805_H__
-#define __SENSOR_MEAS_MS5805_H__
+#ifndef __MEAS_MS5805_SENSOR_V1_H__
+#define __MEAS_MS5805_SENSOR_V1_H__
 #include <rtdevice.h>
 
 #if defined(RT_VERSION_CHECK)
@@ -22,4 +22,4 @@
 
 int rt_hw_ms5805_init(const char *name, struct rt_sensor_config *cfg);
 
-#endif /*__SENSOR_MEAS_MS5805_H__*/
+#endif /*__MEAS_MS5805_SENSOR_V1_H__*/
