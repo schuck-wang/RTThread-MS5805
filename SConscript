@@ -8,10 +8,10 @@ cwd   = GetCurrentDir()
 src += ['Src/ms5805.c']
 
 if GetDepend('PKG_MS5805_USING_SENSOR_V1'):
-    src += ['Src/sensor_meas_ms5805.c']
+    src += ['Src/meas_ms5805_sensor_v1.c']
 
 if GetDepend('PKG_USING_MS5805_SAMPLE'):
-    src += Glob('examples/examples_ms5805.c')
+    src += Glob('examples/examples_ms5805_sensor_v1.c')
 
 # add ms5805 include path.
 path  = [cwd + '/Inc']

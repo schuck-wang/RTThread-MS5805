@@ -7,9 +7,9 @@
  * Date           Author       Notes
  * 2020-08-19     Administrator       the first version
  */
-#include "sensor_meas_ms5805.h"
+#include "meas_ms5805_sensor_v1.h"
 #define DBG_ENABLE
-#define DBG_SECTION_NAME "MS5805"
+#define DBG_SECTION_NAME "MS5805.SENSOR.V1"
 #define DBG_LEVEL DBG_LOG
 #include <rtdbg.h>
 

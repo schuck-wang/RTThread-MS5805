@@ -11,9 +11,7 @@
 #include <rtdevice.h>
 #include <board.h>
 
-
-#if defined(RT_USING_SENSOR)
-#include "sensor_meas_ms5805.h"
+#include "meas_ms5805_sensor_v1.h"
 
 int ms5805_port(void)
 {
@@ -23,10 +21,10 @@ int ms5805_port(void)
     return RT_EOK;
 }
 INIT_COMPONENT_EXPORT(ms5805_port);
-#endif
+
 static void read_ms5805_entry(void *args)
 {
-    #if defined(RT_USING_SENSOR)
+
     rt_device_t sensor_baro = RT_NULL;
     rt_device_t sensor_temp = RT_NULL;
     static struct rt_sensor_data data;
@@ -80,7 +78,7 @@ static void read_ms5805_entry(void *args)
     #if defined(PKG_MS5805_USING_TEMP)
     rt_device_close(sensor_temp);
     #endif
-    #endif
+
 }
 static int ms5805_read_sample(void)
 {
